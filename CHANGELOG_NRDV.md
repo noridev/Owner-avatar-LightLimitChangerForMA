@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 기반 LightLimitChanger 버전: <b>1.14.2</b>
 
 ### Changed
-- 기반 LightLimitChanger 버전 업데이트 (<small>1.14.1</small> -> 1.14.2)
+- 기반 LightLimitChanger 버전 업데이트 (<small>1.14.1</small> -> **1.14.2**)
 
 ---
 
@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 기반 LightLimitChanger 버전: <b>1.14.1</b>
 
 ### Changed
-- 기반 LightLimitChanger 버전 업데이트 (<small>1.14.0</small> -> 1.14.1)
+- 기반 LightLimitChanger 버전 업데이트 (<small>1.14.0</small> -> **1.14.1**)
 - Enhance: 한국어 번역 개선
 
 ---
@@ -52,7 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 환경광에 의한 그림자 색을 조정할 수 있음
 
 ### Changed
-- Poiyomi Toon 셰이더 업데이트 (<small>9.0.56</small> -> 9.0.61)
+- Poiyomi Toon 셰이더 업데이트 (<small>9.0.56</small> -> **9.0.61**)
 
 ---
 
@@ -60,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 기반 LightLimitChanger 버전: <b>1.14.0</b>
 
 ### Changed
-- 기반 LightLimitChanger 버전 업데이트 (<small>1.13.2</small> -> 1.14.0)
+- 기반 LightLimitChanger 버전 업데이트 (<small>1.13.2</small> -> **1.14.0**)
 
 ---
 
