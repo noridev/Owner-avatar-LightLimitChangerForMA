@@ -63,10 +63,14 @@ namespace io.github.azukimochi
 
                 // MainTexture
                 bool bakeProcessed = false;
+                var skipOptions = material.GetTag("LLC_TEXTUREBAKE_SKIP_OPTIONS", false, "").Split(";");
 
-                bakeProcessed |= BakeMainTex(material, cache, textureBaker);
-                bakeProcessed |= Bake2ndOr3rdTex(material, cache, textureBaker, (PropertyIDs.Main2ndTex, PropertyIDs.Color2nd), DefaultParameters.Color2nd);
-                bakeProcessed |= Bake2ndOr3rdTex(material, cache, textureBaker, (PropertyIDs.Main3rdTex, PropertyIDs.Color3rd), DefaultParameters.Color3rd);
+                if (!skipOptions.Contains("lilMainTex", StringComparer.OrdinalIgnoreCase))
+                    bakeProcessed |= BakeMainTex(material, cache, textureBaker);
+                if (!skipOptions.Contains("lil2ndTex", StringComparer.OrdinalIgnoreCase))
+                    bakeProcessed |= Bake2ndOr3rdTex(material, cache, textureBaker, (PropertyIDs.Main2ndTex, PropertyIDs.Color2nd), DefaultParameters.Color2nd);
+                if (!skipOptions.Contains("lil3rdTex", StringComparer.OrdinalIgnoreCase))
+                    bakeProcessed |= Bake2ndOr3rdTex(material, cache, textureBaker, (PropertyIDs.Main3rdTex, PropertyIDs.Color3rd), DefaultParameters.Color3rd);
 
                 return bakeProcessed;
             }
@@ -178,19 +182,21 @@ namespace io.github.azukimochi
 
             public override void SetControlAnimation(in ControlAnimationContainer container, in ControlAnimationParameters parameters)
             {
-                if (container.ControlType.HasFlag(LightLimitControlType.LightMin))
+                var skipOptions = parameters.Materials.Where(x => x != null).Select(x => x.GetTag("LLC_ANIMATION_SKIP_OPTIONS", false, null)).Where(x => !string.IsNullOrEmpty(x)).SelectMany(x => x.Split(";")).ToArray();
+
+                if (container.ControlType.HasFlag(LightLimitControlType.LightMin) && !skipOptions.Contains("lilLightMin", StringComparer.OrdinalIgnoreCase))
                 {
                     container.Default.SetParameterAnimation(parameters, _LightMinLimit, parameters.DefaultMinLightValue);
                     container.Control.SetParameterAnimation(parameters, _LightMinLimit, parameters.MinLightValue, parameters.MaxLightValue);
                 }
 
-                if (container.ControlType.HasFlag(LightLimitControlType.LightMax))
+                if (container.ControlType.HasFlag(LightLimitControlType.LightMax) && !skipOptions.Contains("lilLightMax", StringComparer.OrdinalIgnoreCase))
                 {
                     container.Default.SetParameterAnimation(parameters, _LightMaxLimit, parameters.DefaultMaxLightValue);
                     container.Control.SetParameterAnimation(parameters, _LightMaxLimit, parameters.MinLightValue, parameters.MaxLightValue);
                 }
 
-                if (container.ControlType.HasFlag(LightLimitControlType.Saturation))
+                if (container.ControlType.HasFlag(LightLimitControlType.Saturation) && !skipOptions.Contains("lilSaturation", StringComparer.OrdinalIgnoreCase))
                 {
                     container.Default.SetParameterAnimation(parameters, _MainTexHSVG, DefaultParameters.MainTexHSVG);
 
@@ -199,19 +205,19 @@ namespace io.github.azukimochi
                     container.Control.SetParameterAnimation(parameters, $"{_MainTexHSVG}.z", 1, 1);
                     container.Control.SetParameterAnimation(parameters, $"{_MainTexHSVG}.w", 1, 1);
                 }
-                if (container.ControlType.HasFlag(LightLimitControlType.Monochrome))
+                if (container.ControlType.HasFlag(LightLimitControlType.Monochrome) && !skipOptions.Contains("lilMonochrome", StringComparer.OrdinalIgnoreCase))
                 {
                     container.Default.SetParameterAnimation(parameters, _MonochromeLighting, parameters.DefaultMonochromeLightingValue);
                     container.Control.SetParameterAnimation(parameters, _MonochromeLighting, 0, 1);
                 }
 
-                if (container.ControlType.HasFlag(LightLimitControlType.Unlit))
+                if (container.ControlType.HasFlag(LightLimitControlType.Unlit) && !skipOptions.Contains("lilUnlit", StringComparer.OrdinalIgnoreCase))
                 {
                     container.Default.SetParameterAnimation(parameters, _AsUnlit, 0);
                     container.Control.SetParameterAnimation(parameters, _AsUnlit, 0, 1);
                 }
 
-                if (container.ControlType.HasFlag(LightLimitControlType.Emission))
+                if (container.ControlType.HasFlag(LightLimitControlType.Emission) && !skipOptions.Contains("lilEmission", StringComparer.OrdinalIgnoreCase))
                 {
                     container.Default.SetParameterAnimation(parameters, _EmissionBlend, 1);
                     container.Default.SetParameterAnimation(parameters, _Emission2ndBlend, 1);
@@ -220,17 +226,26 @@ namespace io.github.azukimochi
                     container.Control.SetParameterAnimation(parameters, _Emission2ndBlend, 0, 1);
                 }
 
-                if (container.ControlType.HasFlag(LightLimitControlType.ColorTemperature))
+                if (container.ControlType.HasFlag(LightLimitControlType.ColorTemperature) && !skipOptions.Contains("lilColorTemp", StringComparer.OrdinalIgnoreCase))
                 {
-                    container.Default.SetParameterAnimation(parameters, _Color, DefaultParameters.Color);
-                    container.Default.SetParameterAnimation(parameters, _Color2nd, DefaultParameters.Color2nd);
-                    container.Default.SetParameterAnimation(parameters, _Color3rd, DefaultParameters.Color3rd);
+                    if (!skipOptions.Contains("lilColorTempMainTex", StringComparer.OrdinalIgnoreCase))
+                    {
+                        container.Default.SetParameterAnimation(parameters, _Color, DefaultParameters.Color);
+                        container.Control.SetColorTempertureAnimation(parameters, _Color);
+                    }
 
-                    container.Control.SetColorTempertureAnimation(parameters, _Color);
-                    container.Control.SetColorTempertureAnimation(parameters, _Color2nd);
-                    container.Control.SetColorTempertureAnimation(parameters, _Color3rd);
+                    if (!skipOptions.Contains("lilColorTemp2ndTex", StringComparer.OrdinalIgnoreCase))
+                    {
+                        container.Default.SetParameterAnimation(parameters, _Color2nd, DefaultParameters.Color2nd);
+                        container.Control.SetColorTempertureAnimation(parameters, _Color2nd);
+                    }
+
+                    if (!skipOptions.Contains("lilColorTemp3rdTex", StringComparer.OrdinalIgnoreCase))
+                    {
+                        container.Default.SetParameterAnimation(parameters, _Color3rd, DefaultParameters.Color3rd);
+                        container.Control.SetColorTempertureAnimation(parameters, _Color3rd);
+                    }
                 }
-
             }
 
             public override bool TryGetLightMinMaxValue(Material material, out float min, out float max)

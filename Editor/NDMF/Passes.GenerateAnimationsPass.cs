@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using gomoru.su;
 using nadena.dev.modular_avatar.core;
 using nadena.dev.ndmf;
@@ -29,6 +30,9 @@ namespace io.github.azukimochi
 
                     var relativePath = renderer.AvatarRootPath();
                     var type = renderer.GetType();
+                    var materials = renderer.sharedMaterials;
+                    if (materials == null)
+                        materials = Array.Empty<Material>();
 
                     foreach (var x in ShaderInfo.RegisteredShaderInfos)
                     {
@@ -67,7 +71,7 @@ namespace io.github.azukimochi
                             }
                         }
 
-                        var param = new ControlAnimationParameters(relativePath, type, min, max, defaultMinLight, defaultMaxLight, defaultMonochromeLighting, defaultMonochromeAdditiveLighting);
+                        var param = new ControlAnimationParameters(relativePath, type, min, max, defaultMinLight, defaultMaxLight, defaultMonochromeLighting, defaultMonochromeAdditiveLighting, materials);
                         foreach (ref readonly var container in animationContainers)
                         {
                             x.SetControlAnimation(container, param);
