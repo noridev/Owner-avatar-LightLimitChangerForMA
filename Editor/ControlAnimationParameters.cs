@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace io.github.azukimochi
 {
@@ -13,8 +14,9 @@ namespace io.github.azukimochi
         public readonly float DefaultMaxLightValue;
         public readonly float DefaultMonochromeLightingValue;
         public readonly float DefaultMonochromeAdditiveLightingValue;
+        public readonly Material[] Materials;
 
-        public ControlAnimationParameters(string targetPath, Type targetType, float minLightValue, float maxLightValue, float defaultMinLightValue, float defaultMaxLightValue, float defaultMonochromeLightingValue, float defaultMonochromeAdditiveLightingValue)
+        public ControlAnimationParameters(string targetPath, Type targetType, float minLightValue, float maxLightValue, float defaultMinLightValue, float defaultMaxLightValue, float defaultMonochromeLightingValue, float defaultMonochromeAdditiveLightingValue, Material[] materials)
         {
             TargetPath = targetPath;
             TargetType = targetType;
@@ -24,6 +26,7 @@ namespace io.github.azukimochi
             DefaultMaxLightValue = defaultMaxLightValue;
             DefaultMonochromeLightingValue = defaultMonochromeLightingValue;
             DefaultMonochromeAdditiveLightingValue = defaultMonochromeAdditiveLightingValue;
+            Materials = materials;
         }
     }
 }
