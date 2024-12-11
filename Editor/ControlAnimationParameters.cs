@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace moe.noridev
 {
@@ -14,8 +15,9 @@ namespace moe.noridev
         public readonly float DefaultMonochromeLightingValue;
         public readonly float DefaultMonochromeAdditiveLightingValue;
         public readonly float DefaultShadowEnvStrengthValue;
+        public readonly Material[] Materials;
 
-        public ControlAnimationParameters(string targetPath, Type targetType, float minLightValue, float maxLightValue, float defaultMinLightValue, float defaultMaxLightValue, float defaultMonochromeLightingValue, float defaultMonochromeAdditiveLightingValue, float defaultShadowEnvStrengthValue)
+        public ControlAnimationParameters(string targetPath, Type targetType, float minLightValue, float maxLightValue, float defaultMinLightValue, float defaultMaxLightValue, float defaultMonochromeLightingValue, float defaultMonochromeAdditiveLightingValue, float defaultShadowEnvStrengthValue, Material[] materials)
         {
             TargetPath = targetPath;
             TargetType = targetType;
@@ -26,6 +28,7 @@ namespace moe.noridev
             DefaultMonochromeLightingValue = defaultMonochromeLightingValue;
             DefaultMonochromeAdditiveLightingValue = defaultMonochromeAdditiveLightingValue;
             DefaultShadowEnvStrengthValue = defaultShadowEnvStrengthValue;
+            Materials = materials;
         }
     }
 }
