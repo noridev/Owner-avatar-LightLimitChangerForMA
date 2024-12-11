@@ -27,6 +27,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -->
 
+## [1.1.3] - 2024-12-11
+기반 LightLimitChanger 버전: <b>1.14.3</b>
+
+### Changed
+- 기반 LightLimitChanger 버전 업데이트 (<small>1.14.2</small> -> **1.14.3**)
+
+---
+
 ## [1.1.2] - 2024-09-30
 기반 LightLimitChanger 버전: <b>1.14.2</b>
 
