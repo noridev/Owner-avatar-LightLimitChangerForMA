@@ -66,7 +66,7 @@ namespace moe.noridev
 
                 // MainTexture
                 bool bakeProcessed = false;
-                var skipOptions = material.GetTag("LLC_TEXTUREBAKE_SKIP_OPTIONS", false, "").Split(";");
+                var skipOptions = material.GetTag("LLC_TEXTUREBAKE_SKIP_OPTIONS", false, "").Split(';');
 
                 if (!skipOptions.Contains("lilMainTex", StringComparer.OrdinalIgnoreCase))
                     bakeProcessed |= BakeMainTex(material, cache, textureBaker);
@@ -185,7 +185,7 @@ namespace moe.noridev
 
             public override void SetControlAnimation(in ControlAnimationContainer container, in ControlAnimationParameters parameters, in LightLimitChangerParameters llc_parameters)
             {
-                var skipOptions = parameters.Materials.Where(x => x != null).Select(x => x.GetTag("LLC_ANIMATION_SKIP_OPTIONS", false, null)).Where(x => !string.IsNullOrEmpty(x)).SelectMany(x => x.Split(";")).ToArray();
+                var skipOptions = parameters.Materials.Where(x => x != null).Select(x => x.GetTag("LLC_ANIMATION_SKIP_OPTIONS", false, null)).Where(x => !string.IsNullOrEmpty(x)).SelectMany(x => x.Split(';')).ToArray();
 
                 if (container.ControlType.HasFlag(LightLimitControlType.LightMin) && !skipOptions.Contains("lilLightMin", StringComparer.OrdinalIgnoreCase))
                 {
