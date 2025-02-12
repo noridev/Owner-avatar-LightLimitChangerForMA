@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!--
-## [1.x.x] - 2024-x-x
+## [1.x.x] - 2025-x-x
 기반 LightLimitChanger 버전: <b>1.x.x</b>
 
 ### Added
@@ -26,6 +26,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 -->
+
+## [1.1.4] - 2025-02-12
+기반 LightLimitChanger 버전: <b>1.14.3</b>
+
+### Changed
+- Poiyomi Toon 셰이더 업데이트 (<small>9.0.61</small> -> **9.1.20**)
+
+---
 
 ## [1.1.3] - 2024-12-11
 기반 LightLimitChanger 버전: <b>1.14.3</b>
